@@ -1,35 +1,74 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
       <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <hr style={{ border: "1px solid gray" }} />
+      <div className="task-card">
+        <h3>Weather App</h3>
+        <ul>
+          <li className="list-task">
+            Fetch data from a weather API
+            <ul>
+              <li>
+                <a href="https://www.weather.gov/documentation/services-web-api#/default/alerts_query">
+                  https://www.weather.gov/documentation/services-web-api
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li className="list-task">
+            Learn how to handle asynchronous operations
+            <ul>
+              <li>
+                <input type="checkbox" id="async-operations" />
+                <label htmlFor="async-operations">
+                  Get data from the API using fetch
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="async-operations" />
+                <label htmlFor="async-operations">
+                  Use async/await to handle promises
+                </label>
+              </li>
+            </ul>
+          </li>
+          <li className="list-task">
+            Implement error handling and loading states
+            <ul>
+              <li>
+                <input type="checkbox" id="error-handling" />
+                <label htmlFor="error-handling">
+                  Handle errors from the API
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="loading-states" />
+                <label htmlFor="loading-states">
+                  Show loading state while fetching data
+                </label>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <hr style={{ border: "1px solid gray" }} />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
+{
+  /*
+  - **Weather App**:
+    - Fetch data from a weather API.
+        - https://www.weather.gov/documentation/services-web-api#/default/alerts_query
+    - Learn how to handle asynchronous operations.
+    - Implement error handling and loading states.
+   */
+}

@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+
+.task-card {
+  li {
+    text-align: left;
+    list-style-type: none;
+  }
+}
+
+.list-task {
+  padding-bottom: 10px;}
