@@ -49,4 +49,45 @@
 }
 
 .list-task {
-  padding-bottom: 10px;}
+  padding-bottom: 10px;
+}
+
+.weather-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* background: #000; */
+}
+.weather-card {
+  /* background: #c0c0c0; */
+  margin: 10px;
+  padding: 5px 10px;
+  border: #888 solid 1px;
+  border-radius: 10px;
+}
+.weather-card-header {
+  h2 {
+
+    text-wrap: wrap;
+  }
+}
+.weather-icon {
+}
+.weather-info {
+  display: flex;
+  font-size: small;
+  justify-content: space-evenly;
+  p {
+    margin: 5px 1px;
+    padding: 1px;
+  }
+}
+.temperature-high {
+  padding: 1px;
+  color: whitesmoke;
+}
+.temperature-low {
+  padding: 1px;
+  color: rgb(180, 180, 180);
+}

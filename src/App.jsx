@@ -1,62 +1,64 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import Brief from "./components/brief";
+import { useQuery } from "@tanstack/react-query";
+
+const array = [0, 2, 4, 6, 8, 10, 12];
 
 function App() {
+  const { isPending, error, data } = useQuery({
+    queryKey: ["weatherData"],
+    queryFn: async () => {
+      const response = await fetch(
+        "https://api.weather.gov/gridpoints/LOT/65,67/forecast"
+      );
+      return await response.json();
+    },
+  });
+
+  if (isPending) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <hr style={{ border: "1px solid gray" }} />
-      <div className="task-card">
-        <h3>Weather App</h3>
-        <ul>
-          <li className="list-task">
-            Fetch data from a weather API
-            <ul>
-              <li>
-                <a href="https://www.weather.gov/documentation/services-web-api#/default/alerts_query">
-                  https://www.weather.gov/documentation/services-web-api
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li className="list-task">
-            Learn how to handle asynchronous operations
-            <ul>
-              <li>
-                <input type="checkbox" id="async-operations" />
-                <label htmlFor="async-operations">
-                  Get data from the API using fetch
-                </label>
-              </li>
-              <li>
-                <input type="checkbox" id="async-operations" />
-                <label htmlFor="async-operations">
-                  Use async/await to handle promises
-                </label>
-              </li>
-            </ul>
-          </li>
-          <li className="list-task">
-            Implement error handling and loading states
-            <ul>
-              <li>
-                <input type="checkbox" id="error-handling" />
-                <label htmlFor="error-handling">
-                  Handle errors from the API
-                </label>
-              </li>
-              <li>
-                <input type="checkbox" id="loading-states" />
-                <label htmlFor="loading-states">
-                  Show loading state while fetching data
-                </label>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <hr style={{ border: "1px solid gray" }} />
+      <h1>Weather App</h1>
+      <div className="weather-card-container">
+        {array.map((key, index) => (
+          <div className="weather-card">
+            <div className="weather-card-header">
+              <h2>
+                {data.properties.periods[key].name == "This Afternoon"
+                  ? "Today"
+                  : data.properties.periods[key].name}
+              </h2>
+              <img
+                className="weather-icon"
+                src={data.properties.periods[key].icon}
+                alt="weather-icon"
+              />
+              <div className="weather-info">
+                <p className="temperature-high">
+                  {tempHigh(
+                    data.properties.periods[key].temperature,
+                    data.properties.periods[key + 1].temperature
+                  )}
+                  °F
+                </p>
+                <p className="temperature-low">
+                  {" "}
+                  {tempLow(
+                    data.properties.periods[key].temperature,
+                    data.properties.periods[key + 1].temperature
+                  )}
+                  °F
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
+      <Brief />
     </>
   );
 }
@@ -71,4 +73,12 @@ export default App;
     - Learn how to handle asynchronous operations.
     - Implement error handling and loading states.
    */
+}
+
+function tempHigh(temp1, temp2) {
+  return temp1 > temp2 ? temp1 : temp2;
+}
+
+function tempLow(temp1, temp2) {
+  return temp1 < temp2 ? temp1 : temp2;
 }
